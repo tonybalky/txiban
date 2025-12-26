@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TourCard from '../../components/TourCard.astro';
+
+// All tours data - replace with actual content later
+const allTours = [
+  {
+    title: 'Desert Safari Adventure',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Explore the stunning Viana Desert and discover ancient shipwrecks.',
+    image: '/images/tours/desert-safari.jpg',
+    duration: '4 hours',
+    price: 'From €65',
+    slug: 'desert-safari',
+    category: 'Adventure'
+  },
+  {
+    title: 'Santa Monica Beach Tour',
+    description: 'Lorem ipsum dolor sit amet. Visit the longest beach in Cape Verde, stretching 22km of pristine white sand.',
+    image: '/images/tours/santa-monica.jpg',
+    duration: '6 hours',
+    price: 'From €55',
+    slug: 'santa-monica-beach',
+    category: 'Beach'
+  },
+  {
+    title: 'Whale Watching Expedition',
+    description: 'Lorem ipsum dolor sit amet. Witness majestic humpback whales in their natural habitat with expert marine guides.',
+    image: '/images/tours/whale-watching.jpg',
+    duration: '3 hours',
+    price: 'From €75',
+    slug: 'whale-watching',
+    category: 'Wildlife'
+  },
+  {
+    title: 'Cultural Heritage Tour',
+    description: 'Lorem ipsum dolor sit amet. Discover the rich history and traditions of Boa Vista through its villages and artisans.',
+    image: '/images/tours/cultural-tour.jpg',
+    duration: '5 hours',
+    price: 'From €45',
+    slug: 'cultural-tour',
+    category: 'Culture'
+  },
+  {
+    title: 'Quad Bike Desert Experience',
+    description: 'Lorem ipsum dolor sit amet. Thrilling quad bike adventure through dunes, beaches, and to the famous shipwreck.',
+    image: '/images/tours/quad-tour.jpg',
+    duration: '2 hours',
+    price: 'From €80',
+    slug: 'quad-tour',
+    category: 'Adventure'
+  },
+  {
+    title: 'Sunset Island Tour',
+    description: 'Lorem ipsum dolor sit amet. Experience magical sunset views from secret locations across the island.',
+    image: '/images/tours/sunset-tour.jpg',
+    duration: '4 hours',
+    price: 'From €50',
+    slug: 'sunset-tour',
+    category: 'Scenic'
+  },
+  {
+    title: 'Jeep Expedition North',
+    description: 'Lorem ipsum dolor sit amet. Full-day jeep expedition exploring the northern coast, villages and hidden beaches.',
+    image: '/images/tours/jeep-north.jpg',
+    duration: 'Full day',
+    price: 'From €85',
+    slug: 'jeep-expedition-north',
+    category: 'Adventure'
+  },
+  {
+    title: 'Jeep Expedition South',
+    description: 'Lorem ipsum dolor sit amet. Discover the southern landscapes with stunning beaches and traditional villages.',
+    image: '/images/tours/jeep-south.jpg',
+    duration: 'Full day',
+    price: 'From €85',
+    slug: 'jeep-expedition-south',
+    category: 'Adventure'
+  },
+  {
+    title: 'Buggy Adventure Tour',
+    description: 'Lorem ipsum dolor sit amet. Exciting buggy ride through diverse terrains from desert dunes to coastal paths.',
+    image: '/images/tours/buggy-tour.jpg',
+    duration: '3 hours',
+    price: 'From €90',
+    slug: 'buggy-tour',
+    category: 'Adventure'
+  },
+  {
+    title: 'Fishing Experience',
+    description: 'Lorem ipsum dolor sit amet. Traditional fishing excursion with local fishermen in crystal clear waters.',
+    image: '/images/tours/fishing.jpg',
+    duration: '4 hours',
+    price: 'From €60',
+    slug: 'fishing-experience',
+    category: 'Experience'
+  },
+  {
+    title: 'Snorkeling Paradise',
+    description: 'Lorem ipsum dolor sit amet. Explore vibrant underwater world at the best snorkeling spots of Boa Vista.',
+    image: '/images/tours/snorkeling.jpg',
+    duration: '3 hours',
+    price: 'From €45',
+    slug: 'snorkeling',
+    category: 'Water Sports'
+  },
+  {
+    title: 'Turtle Watching Tour',
+    description: 'Lorem ipsum dolor sit amet. Seasonal guided tours to witness loggerhead turtles nesting on our beaches.',
+    image: '/images/tours/turtle-watching.jpg',
+    duration: '3 hours',
+    price: 'From €40',
+    slug: 'turtle-watching',
+    category: 'Wildlife'
+  }
+];
+
+const categories = ['All', 'Adventure', 'Beach', 'Wildlife', 'Culture', 'Scenic', 'Water Sports', 'Experience'];
+---
+
+<BaseLayout title="Tours & Expeditions" description="Explore all our tours and expeditions in Boa Vista, Cape Verde. Desert safaris, beach tours, whale watching, cultural experiences and more.">
+  <!-- Page Header -->
+  <section class="pt-24 pb-12 md:pt-32 md:pb-16 bg-dark">
+    <div class="container">
+      <div class="max-w-3xl">
+        <span class="text-primary font-semibold text-sm tracking-wider uppercase">Explore Boa Vista</span>
+        <h1 class="font-display font-bold text-4xl md:text-5xl text-white mt-2 mb-4">
+          Tours & Expeditions
+        </h1>
+        <p class="text-gray-300 text-lg">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Choose from our carefully curated experiences.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Tabs -->
+  <section class="sticky top-16 md:top-20 bg-white shadow-sm z-40">
+    <div class="container">
+      <div class="flex gap-2 py-4 overflow-x-auto scrollbar-hide">
+        {categories.map((cat, index) => (
+          <button
+            data-category={cat}
+            class={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+              index === 0
+                ? 'bg-primary text-white'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tours Grid -->
+  <section class="py-12 md:py-16 bg-light">
+    <div class="container">
+      <div id="tours-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {allTours.map(tour => (
+          <div data-tour-category={tour.category}>
+            <TourCard {...tour} />
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="hidden text-center py-16">
+        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h3 class="text-xl font-semibold text-gray-600 mb-2">No tours found</h3>
+        <p class="text-gray-500">Try selecting a different category.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="container">
+      <div class="bg-primary rounded-2xl p-8 md:p-12 text-center">
+        <h2 class="font-display font-bold text-2xl md:text-3xl text-white mb-4">
+          Can't Find What You're Looking For?
+        </h2>
+        <p class="text-white/90 mb-8 max-w-2xl mx-auto">
+          Lorem ipsum dolor sit amet. We offer custom tours tailored to your preferences. Contact us to create your perfect adventure.
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+        >
+          Request Custom Tour
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  const filterButtons = document.querySelectorAll('[data-category]');
+  const tourCards = document.querySelectorAll('[data-tour-category]');
+  const emptyState = document.getElementById('empty-state');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const category = button.getAttribute('data-category');
+
+      // Update active button
+      filterButtons.forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-white');
+        btn.classList.add('bg-gray-100', 'text-gray-600');
+      });
+      button.classList.remove('bg-gray-100', 'text-gray-600');
+      button.classList.add('bg-primary', 'text-white');
+
+      // Filter tours
+      let visibleCount = 0;
+      tourCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-tour-category');
+        if (category === 'All' || cardCategory === category) {
+          (card as HTMLElement).style.display = 'block';
+          visibleCount++;
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+
+      // Show/hide empty state
+      if (visibleCount === 0) {
+        emptyState?.classList.remove('hidden');
+      } else {
+        emptyState?.classList.add('hidden');
+      }
+    });
+  });
+</script>
