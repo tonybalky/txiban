@@ -1,0 +1,61 @@
+---
+// Seasonal urgency badge for tours
+interface Props {
+  tourSlug: string;
+}
+
+const { tourSlug } = Astro.props;
+
+// Get current month (0-11)
+const currentMonth = new Date().getMonth();
+
+// Seasonal tour availability in Boa Vista
+const seasonalTours: Record<string, { months: number[]; label: string; urgent?: boolean }> = {
+  'whale-watching': {
+    months: [2, 3, 4, 5], // March-June (peak: March-May)
+    label: 'Season: Mar-Jun',
+    urgent: currentMonth >= 2 && currentMonth <= 5
+  },
+  'turtle-watching': {
+    months: [5, 6, 7, 8, 9], // June-October (nesting season)
+    label: 'Season: Jun-Oct',
+    urgent: currentMonth >= 5 && currentMonth <= 9
+  }
+};
+
+const tourSeason = seasonalTours[tourSlug];
+const isInSeason = tourSeason?.months.includes(currentMonth);
+const isEndingSoon = tourSeason && tourSeason.months[tourSeason.months.length - 1] === currentMonth;
+---
+
+{tourSeason && (
+  <div class="seasonal-badge">
+    {isInSeason ? (
+      <div class={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${isEndingSoon ? 'bg-orange-100 text-orange-700' : 'bg-green-100 text-green-700'}`}>
+        {isEndingSoon ? (
+          <>
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+            </span>
+            Season ending soon!
+          </>
+        ) : (
+          <>
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            In Season Now!
+          </>
+        )}
+      </div>
+    ) : (
+      <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        {tourSeason.label}
+      </div>
+    )}
+  </div>
+)}

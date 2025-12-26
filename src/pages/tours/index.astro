@@ -118,19 +118,44 @@ const categories = ['All', 'Full Day', 'Half Day', 'Adventure', 'Wildlife', 'Cul
   <!-- Filter Tabs -->
   <section class="sticky top-16 md:top-20 bg-white shadow-sm z-40">
     <div class="container">
-      <div class="flex gap-2 py-4 overflow-x-auto scrollbar-hide">
-        {categories.map((cat, index) => (
+      <div class="flex items-center justify-between py-4">
+        <!-- Category filters -->
+        <div class="flex gap-2 overflow-x-auto scrollbar-hide flex-1">
+          {categories.map((cat, index) => (
+            <button
+              data-category={cat}
+              class={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+                index === 0
+                  ? 'bg-primary text-white'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <!-- View toggle (mobile only) -->
+        <div class="flex md:hidden items-center gap-1 ml-3 bg-gray-100 rounded-lg p-1">
           <button
-            data-category={cat}
-            class={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-              index === 0
-                ? 'bg-primary text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
+            id="view-grid"
+            class="view-toggle p-2 rounded-md bg-white shadow-sm text-primary"
+            aria-label="Grid view"
           >
-            {cat}
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+            </svg>
           </button>
-        ))}
+          <button
+            id="view-list"
+            class="view-toggle p-2 rounded-md text-gray-400"
+            aria-label="List view"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -222,13 +247,53 @@ const categories = ['All', 'Full Day', 'Half Day', 'Adventure', 'Wildlife', 'Cul
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Grid view (default on mobile) */
+  @media (max-width: 767px) {
+    #tours-grid.grid-view {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    #tours-grid.grid-view :global(.tour-card) {
+      /* Compact card for grid */
+    }
+
+    #tours-grid.grid-view :global(.tour-card p) {
+      display: none;
+    }
+
+    #tours-grid.grid-view :global(.tour-card h3) {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    #tours-grid.grid-view :global(.tour-card .p-5) {
+      padding: 12px;
+    }
+
+    /* Hide rating in grid view on mobile */
+    #tours-grid.grid-view :global(.tour-card .flex.items-center.gap-2.mb-4) {
+      display: none;
+    }
+
+    /* List view */
+    #tours-grid.list-view {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
 </style>
 
 <script>
   const filterButtons = document.querySelectorAll('[data-category]');
   const tourCards = document.querySelectorAll('[data-tour-category]');
   const emptyState = document.getElementById('empty-state');
+  const toursGrid = document.getElementById('tours-grid');
+  const viewGridBtn = document.getElementById('view-grid');
+  const viewListBtn = document.getElementById('view-list');
 
+  // Category filtering
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
       const category = button.getAttribute('data-category');
@@ -261,4 +326,37 @@ const categories = ['All', 'Full Day', 'Half Day', 'Adventure', 'Wildlife', 'Cul
       }
     });
   });
+
+  // View toggle (grid/list)
+  function setView(view: 'grid' | 'list') {
+    if (!toursGrid) return;
+
+    if (view === 'grid') {
+      toursGrid.classList.remove('list-view');
+      toursGrid.classList.add('grid-view');
+      viewGridBtn?.classList.add('bg-white', 'shadow-sm', 'text-primary');
+      viewGridBtn?.classList.remove('text-gray-400');
+      viewListBtn?.classList.remove('bg-white', 'shadow-sm', 'text-primary');
+      viewListBtn?.classList.add('text-gray-400');
+    } else {
+      toursGrid.classList.remove('grid-view');
+      toursGrid.classList.add('list-view');
+      viewListBtn?.classList.add('bg-white', 'shadow-sm', 'text-primary');
+      viewListBtn?.classList.remove('text-gray-400');
+      viewGridBtn?.classList.remove('bg-white', 'shadow-sm', 'text-primary');
+      viewGridBtn?.classList.add('text-gray-400');
+    }
+
+    // Save preference
+    localStorage.setItem('toursView', view);
+  }
+
+  // Load saved preference
+  const savedView = localStorage.getItem('toursView') as 'grid' | 'list' | null;
+  if (savedView) {
+    setView(savedView);
+  }
+
+  viewGridBtn?.addEventListener('click', () => setView('grid'));
+  viewListBtn?.addEventListener('click', () => setView('list'));
 </script>

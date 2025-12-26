@@ -1,0 +1,94 @@
+---
+// Sticky mobile CTA bar - appears at bottom on mobile devices
+---
+
+<div class="mobile-cta-bar">
+  <div class="cta-content">
+    <div class="cta-text">
+      <span class="cta-label">Ready to explore?</span>
+      <span class="cta-price">Tours from <strong>€40</strong></span>
+    </div>
+    <a href="/contact" class="cta-button">
+      Book Now
+    </a>
+  </div>
+</div>
+
+<style>
+  .mobile-cta-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e5e5;
+    padding: 12px 16px;
+    z-index: 999;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .mobile-cta-bar {
+      display: block;
+    }
+  }
+
+  .cta-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .cta-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .cta-label {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .cta-price {
+    font-size: 14px;
+    color: #1a1a1a;
+  }
+
+  .cta-price strong {
+    font-size: 18px;
+    color: #a82005;
+  }
+
+  .cta-button {
+    background: linear-gradient(135deg, #a82005 0%, #8a1a04 100%);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .cta-button:active {
+    transform: scale(0.96);
+  }
+
+  /* Add padding to body on mobile to prevent content being hidden */
+  @media (max-width: 768px) {
+    :global(body) {
+      padding-bottom: 72px;
+    }
+  }
+
+  /* Hide when mobile menu is open */
+  :global(.mobile-menu-active) .mobile-cta-bar {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+</style>

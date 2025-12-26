@@ -1,0 +1,312 @@
+---
+// Lead Magnet Popup - 10% discount via Tally.so embedded form
+// Shows after 8 seconds, only once per session
+
+// Replace with your Tally.so form ID (create at tally.so)
+// Example: if your form URL is tally.so/r/abc123, the ID is "abc123"
+const tallyFormId = "zxNBg0";
+---
+
+<div id="lead-popup" class="lead-popup-overlay">
+  <div class="lead-popup-container">
+    <!-- Close button -->
+    <button id="lead-popup-close" class="lead-popup-close" aria-label="Close popup">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- Content -->
+    <div class="lead-popup-content">
+      <!-- Left side - Branding (hidden on mobile) -->
+      <div class="lead-popup-image">
+        <img src="/images/hero-beach.jpg" alt="Boa Vista Beach" />
+        <div class="lead-popup-image-overlay">
+          <div class="text-white text-center p-6">
+            <div class="text-5xl font-bold mb-2">10%</div>
+            <div class="text-xl">OFF</div>
+            <div class="text-sm mt-2 opacity-80">Your First Tour</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side - Tally Form -->
+      <div class="lead-popup-form-section">
+        <div class="lead-popup-badge">Limited Time Offer</div>
+        <h2 class="lead-popup-title">Get 10% Off Your First Adventure!</h2>
+
+        <!-- Tally.so Embedded Form -->
+        <div class="tally-form-container">
+          <iframe
+            data-tally-src={`https://tally.so/embed/${tallyFormId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}
+            loading="lazy"
+            width="100%"
+            height="300"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title="Get 10% Discount"
+            class="tally-iframe"
+          ></iframe>
+        </div>
+
+        <p class="lead-privacy">
+          <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+          We respect your privacy. Unsubscribe anytime.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .lead-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .lead-popup-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lead-popup-container {
+    background: white;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .lead-popup-overlay.is-visible .lead-popup-container {
+    transform: scale(1) translateY(0);
+  }
+
+  .lead-popup-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .lead-popup-close:hover {
+    background: #f5f5f5;
+    color: #333;
+    transform: rotate(90deg);
+  }
+
+  .lead-popup-content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+  }
+
+  @media (max-width: 640px) {
+    .lead-popup-content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .lead-popup-image {
+    position: relative;
+    min-height: 350px;
+    display: none;
+  }
+
+  @media (min-width: 641px) {
+    .lead-popup-image {
+      display: block;
+    }
+  }
+
+  .lead-popup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .lead-popup-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(168, 32, 5, 0.9), rgba(168, 32, 5, 0.7));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lead-popup-form-section {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 640px) {
+    .lead-popup-form-section {
+      padding: 24px;
+      text-align: center;
+    }
+  }
+
+  .lead-popup-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #a82005, #d32f2f);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    width: fit-content;
+  }
+
+  @media (max-width: 640px) {
+    .lead-popup-badge {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .lead-popup-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  @media (max-width: 640px) {
+    .lead-popup-title {
+      font-size: 22px;
+    }
+  }
+
+  .lead-popup-text {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .lead-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .lead-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #444;
+  }
+
+  .tally-form-container {
+    margin: 16px 0;
+    min-height: 200px;
+  }
+
+  .tally-iframe {
+    border: none;
+    width: 100%;
+  }
+
+  .lead-privacy {
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+<script>
+  const popup = document.getElementById('lead-popup');
+  const closeBtn = document.getElementById('lead-popup-close');
+
+  // Load Tally embed script
+  function loadTallyScript() {
+    if (document.querySelector('script[src="https://tally.so/widgets/embed.js"]')) return;
+    const script = document.createElement('script');
+    script.src = 'https://tally.so/widgets/embed.js';
+    script.async = true;
+    document.head.appendChild(script);
+  }
+
+  // Check if popup was already shown in this session
+  const popupShown = sessionStorage.getItem('leadPopupShown');
+
+  // Show popup after 8 seconds if not already shown
+  if (!popupShown && popup) {
+    setTimeout(() => {
+      popup.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+      loadTallyScript(); // Load Tally when popup opens
+    }, 8000);
+  }
+
+  // Close popup
+  function closePopup() {
+    popup?.classList.remove('is-visible');
+    document.body.style.overflow = '';
+    sessionStorage.setItem('leadPopupShown', 'true');
+  }
+
+  closeBtn?.addEventListener('click', closePopup);
+
+  // Close on overlay click
+  popup?.addEventListener('click', (e) => {
+    if (e.target === popup) {
+      closePopup();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && popup?.classList.contains('is-visible')) {
+      closePopup();
+    }
+  });
+
+  // Listen for Tally form submission to auto-close popup
+  window.addEventListener('message', (e) => {
+    if (e.data?.event === 'Tally.FormSubmitted') {
+      sessionStorage.setItem('leadPopupShown', 'true');
+      setTimeout(closePopup, 1500); // Close after showing success
+    }
+  });
+</script>

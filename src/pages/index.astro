@@ -13,7 +13,8 @@ const featuredTours = [
     duration: '8 hours',
     price: 'From €70',
     slug: 'island-tour',
-    category: 'Full Day'
+    category: 'Full Day',
+    featured: true
   },
   {
     title: 'Whale Watching Expedition',
@@ -22,7 +23,8 @@ const featuredTours = [
     duration: '3 hours',
     price: 'From €80',
     slug: 'whale-watching',
-    category: 'Wildlife'
+    category: 'Wildlife',
+    featured: true
   },
   {
     title: '4WD Buggy Adventure',
@@ -58,7 +60,8 @@ const featuredTours = [
     duration: '3 hours',
     price: 'From €65',
     slug: 'turtle-watching',
-    category: 'Wildlife'
+    category: 'Wildlife',
+    featured: true
   }
 ];
 
@@ -99,7 +102,7 @@ const whyChooseUs = [
   <!-- Featured Tours Section -->
   <section class="py-16 md:py-24 bg-white">
     <div class="container">
-      <div class="text-center mb-12 md:mb-16">
+      <div class="text-center mb-12 md:mb-16 animate-on-scroll">
         <span class="text-primary font-semibold text-sm tracking-wider uppercase">Our Experiences</span>
         <h2 class="font-display font-bold text-3xl md:text-4xl text-dark mt-2 mb-4">
           Popular Tours & Adventures
@@ -132,7 +135,7 @@ const whyChooseUs = [
   <!-- Why Choose Us Section -->
   <section class="py-16 md:py-24 bg-light">
     <div class="container">
-      <div class="text-center mb-12 md:mb-16">
+      <div class="text-center mb-12 md:mb-16 animate-on-scroll">
         <span class="text-primary font-semibold text-sm tracking-wider uppercase">Why Boavista Go</span>
         <h2 class="font-display font-bold text-3xl md:text-4xl text-dark mt-2 mb-4">
           Your Adventure Awaits
@@ -143,9 +146,9 @@ const whyChooseUs = [
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {whyChooseUs.map(item => (
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+        {whyChooseUs.map((item, index) => (
+          <div class={`text-center animate-fade-up delay-${(index + 1) * 100}`}>
+            <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 hover:bg-primary/20 hover:scale-110 transition-all duration-300">
               <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
               </svg>
