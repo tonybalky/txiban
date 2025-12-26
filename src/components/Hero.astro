@@ -1,6 +1,4 @@
 ---
-import WeatherWidget from './WeatherWidget.astro';
-
 interface Props {
   title: string;
   subtitle?: string;
@@ -9,7 +7,6 @@ interface Props {
   ctaLink?: string;
   overlay?: boolean;
   showStats?: boolean;
-  showWeather?: boolean;
 }
 
 const {
@@ -19,11 +16,8 @@ const {
   ctaText = 'Explore Tours',
   ctaLink = '/tours',
   overlay = true,
-  showStats = true,
-  showWeather = true
+  showStats = true
 } = Astro.props;
-
-// Stats removed - using trust badges instead
 ---
 
 <section class="relative min-h-[90vh] md:min-h-screen flex items-center overflow-hidden">
@@ -119,12 +113,6 @@ const {
         )}
       </div>
 
-      <!-- Weather Widget - Desktop only -->
-      {showWeather && (
-        <div class="hero-animate delay-500 hidden lg:block">
-          <WeatherWidget />
-        </div>
-      )}
     </div>
   </div>
 

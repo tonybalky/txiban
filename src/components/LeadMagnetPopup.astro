@@ -38,10 +38,9 @@ const tallyFormId = "zxNBg0";
         <!-- Tally.so Embedded Form -->
         <div class="tally-form-container">
           <iframe
-            data-tally-src={`https://tally.so/embed/${tallyFormId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}
-            loading="lazy"
+            src={`https://tally.so/embed/${tallyFormId}?alignLeft=1&hideTitle=1&transparentBackground=1`}
             width="100%"
-            height="300"
+            height="280"
             frameborder="0"
             marginheight="0"
             marginwidth="0"
@@ -258,15 +257,6 @@ const tallyFormId = "zxNBg0";
   const popup = document.getElementById('lead-popup');
   const closeBtn = document.getElementById('lead-popup-close');
 
-  // Load Tally embed script
-  function loadTallyScript() {
-    if (document.querySelector('script[src="https://tally.so/widgets/embed.js"]')) return;
-    const script = document.createElement('script');
-    script.src = 'https://tally.so/widgets/embed.js';
-    script.async = true;
-    document.head.appendChild(script);
-  }
-
   // Check if popup was already shown in this session
   const popupShown = sessionStorage.getItem('leadPopupShown');
 
@@ -275,7 +265,6 @@ const tallyFormId = "zxNBg0";
     setTimeout(() => {
       popup.classList.add('is-visible');
       document.body.style.overflow = 'hidden';
-      loadTallyScript(); // Load Tally when popup opens
     }, 8000);
   }
 
@@ -299,14 +288,6 @@ const tallyFormId = "zxNBg0";
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && popup?.classList.contains('is-visible')) {
       closePopup();
-    }
-  });
-
-  // Listen for Tally form submission to auto-close popup
-  window.addEventListener('message', (e) => {
-    if (e.data?.event === 'Tally.FormSubmitted') {
-      sessionStorage.setItem('leadPopupShown', 'true');
-      setTimeout(closePopup, 1500); // Close after showing success
     }
   });
 </script>
