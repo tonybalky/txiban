@@ -1,0 +1,707 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Tour {
+  title: string;
+  description: string;
+  fullDescription: string;
+  highlights: string[];
+  includes: string[];
+  image: string;
+  gallery: string[];
+  duration: string;
+  price: string;
+  priceNote?: string;
+  category: string;
+  seasonal?: string;
+}
+
+// All tour data with full descriptions
+const toursData: Record<string, Tour> = {
+  'island-tour': {
+    title: '4x4 Full Day Island Tour',
+    description: 'Explore Santa Monica beach, discover shipwrecks, see Varandinha\'s mysterious caves, sandboard on dunes, and savor a tasty local lunch.',
+    fullDescription: `The 4x4 Full Day Island Tour is designed for visitors seeking a comprehensive experience of the island in just one day. It offers a deep dive into Boa Vista's natural landscapes, cultural heritage, and unique attractions. Whether you're fascinated by stunning beaches, intrigued by historical sites, or eager to try sandboarding, this tour covers it all.
+
+This tour offers a variety of activities and locations to explore! First, you'll ride through the Viana Desert, a vast stretch of golden sand dunes with a stunning backdrop of mountains. Then, visit Varandinha Beach, known for its natural caves, crystal-clear waters, and dramatic cliffs. Stop by the shipwreck Cabo Santa Maria, a famous landmark on the northern coast that's become an iconic photo opportunity.
+
+Experience the thrill of sandboarding on the dunes near Morro de Areia—an exhilarating activity for all ages. Enjoy a traditional Cabo Verdean lunch at a local restaurant, featuring fresh seafood and regional dishes. End your adventure at Santa Monica Beach, a pristine stretch of white sand and turquoise waters, perfect for relaxation or a refreshing swim.`,
+    highlights: [
+      'Visit Santa Monica Beach - 22km of pristine white sand',
+      'See the famous Cabo Santa Maria shipwreck',
+      'Explore Varandinha\'s mysterious caves and cliffs',
+      'Sandboarding on golden dunes',
+      'Traditional Cabo Verdean lunch included',
+      'Drive through the stunning Viana Desert'
+    ],
+    includes: [
+      'Hotel pickup and drop-off',
+      'Professional local guide',
+      '4x4 vehicle transportation',
+      'Traditional lunch with drinks',
+      'Sandboarding equipment',
+      'All entrance fees'
+    ],
+    image: '/images/tours/island-tour.jpg',
+    gallery: ['/images/tours/island-tour/1.jpg', '/images/tours/island-tour/2.jpg', '/images/tours/island-tour/3.jpg', '/images/tours/island-tour/4.jpg'],
+    duration: '8 hours',
+    price: '€70 / €50',
+    priceNote: 'Adult / Child (under 12)',
+    category: 'Full Day'
+  },
+  'whale-watching': {
+    title: 'Whale Watching Expedition',
+    description: 'Join us on the ultimate whale-watching expedition in the pristine waters of Boa Vista Island.',
+    fullDescription: `Experience the majesty of humpback whales in their natural habitat during our Whale Watching Expedition. Every year, from March to May, these magnificent creatures migrate to the warm waters surrounding Boa Vista to breed and give birth, offering visitors an unforgettable spectacle.
+
+Our experienced captains know the best spots to find these gentle giants, and our boats are equipped with all safety measures while maintaining a respectful distance from the whales. Watch in awe as humpback whales breach, tail slap, and interact with their calves in the crystal-clear Atlantic waters.
+
+This tour operates during the whale season only (March to May) when sightings are most frequent. The waters around Boa Vista provide one of the best whale watching opportunities in all of West Africa, making this a truly special experience for nature lovers and photographers alike.`,
+    highlights: [
+      'Witness humpback whales in their natural habitat',
+      'Experienced local captains who know the best spots',
+      'Safe and eco-friendly whale watching practices',
+      'Photography opportunities',
+      'Learn about whale behavior and migration patterns',
+      'Small group for better viewing experience'
+    ],
+    includes: [
+      'Hotel pickup and drop-off',
+      'Boat trip with experienced captain',
+      'Safety equipment and life jackets',
+      'Refreshments on board',
+      'Expert guide commentary'
+    ],
+    image: '/images/tours/whale-watching.jpg',
+    gallery: ['/images/tours/whale-watching/1.jpg', '/images/tours/whale-watching/2.jpg', '/images/tours/whale-watching/3.jpg', '/images/tours/whale-watching/4.jpg'],
+    duration: '3 hours',
+    price: '€80 / €60',
+    priceNote: 'Adult / Child (under 12)',
+    category: 'Wildlife',
+    seasonal: 'March to May only'
+  },
+  'buggy-adventure': {
+    title: '4WD Buggy Adventure',
+    description: 'Explore this amazing environment surrounded by untouched nature. Drive through sand dunes, desert and visit Fatima\'s Chapel.',
+    fullDescription: `Get behind the wheel of a powerful 4WD buggy and explore Boa Vista's stunning landscapes on this thrilling adventure. This tour is perfect for those who love driving and want to experience the island's diverse terrain firsthand.
+
+Navigate through rolling sand dunes, cross desert plains, and discover hidden gems that are inaccessible by regular vehicles. Feel the wind in your hair as you drive through some of the most beautiful and untouched scenery in Cape Verde.
+
+Visit the peaceful Fatima's Chapel, a small white church standing alone in the desert—a surreal and photogenic landmark. Continue your adventure through the Viana Desert and enjoy panoramic views of the island's dramatic landscape. End your journey in Sal Rei city, where you can see the colorful local architecture and vibrant atmosphere.`,
+    highlights: [
+      'Drive your own 4WD buggy',
+      'Navigate through sand dunes and desert',
+      'Visit Fatima\'s Chapel in the desert',
+      'Explore the Viana Desert',
+      'Panoramic views of Boa Vista',
+      'Visit Sal Rei city'
+    ],
+    includes: [
+      'Buggy rental with fuel',
+      'Safety briefing and instructions',
+      'Helmets and goggles',
+      'Guide in lead vehicle',
+      'Hotel pickup and drop-off'
+    ],
+    image: '/images/tours/buggy-tour.jpg',
+    gallery: ['/images/tours/buggy-adventure/1.jpg', '/images/tours/buggy-adventure/2.jpg', '/images/tours/buggy-adventure/3.jpg', '/images/tours/buggy-adventure/4.jpg'],
+    duration: '2 hours',
+    price: 'From €70',
+    priceNote: 'Price varies by buggy type (single/double)',
+    category: 'Adventure'
+  },
+  'quad-tour': {
+    title: 'Off-Road Quad Bike Tour',
+    description: 'Discover the diverse scenery of Cape Verde on a quad tour through sand dunes, beaches, and caves.',
+    fullDescription: `Experience the thrill of riding a powerful quad bike through Boa Vista's most spectacular landscapes. This adventure tour takes you off the beaten path to discover hidden beaches, dramatic caves, and endless sand dunes.
+
+Feel the adrenaline as you navigate challenging terrain, from soft sandy beaches to rocky desert trails. Our experienced guides will lead you through the island's most scenic routes, ensuring both safety and excitement throughout the journey.
+
+The tour includes stops at some of Boa Vista's most photogenic locations, giving you plenty of opportunities to capture memories. Whether you're an experienced rider or a complete beginner, our guides will ensure you have a safe and unforgettable adventure. All safety equipment is provided, and you'll receive a thorough briefing before setting off.`,
+    highlights: [
+      'Ride powerful quad bikes through diverse terrain',
+      'Explore sand dunes, beaches, and caves',
+      'Visit Santa Monica beach',
+      'Professional guide and safety equipment',
+      'Suitable for beginners and experienced riders',
+      'Multiple photo stops at scenic locations'
+    ],
+    includes: [
+      'Quad bike rental with fuel',
+      'Helmet and safety gear',
+      'Safety briefing',
+      'Professional guide',
+      'Hotel pickup and drop-off',
+      'Refreshments'
+    ],
+    image: '/images/tours/quad-tour.jpg',
+    gallery: ['/images/tours/quad-tour/1.jpg', '/images/tours/quad-tour/2.jpg', '/images/tours/quad-tour/3.jpg', '/images/tours/quad-tour/4.jpg'],
+    duration: '4 hours',
+    price: '€150 / €220',
+    priceNote: 'Single rider / Double rider',
+    category: 'Adventure'
+  },
+  'north-tour': {
+    title: 'North Coast Discovery',
+    description: 'Visit the pottery school in Rabil, the famous shipwreck at Cabo Santa María, Fatima\'s Chapel, and enjoy snacks at Sodade Restaurant.',
+    fullDescription: `Discover the cultural and natural treasures of Boa Vista's northern coast on this half-day adventure. This tour combines history, craftsmanship, and stunning coastal scenery for a well-rounded island experience.
+
+Begin your journey at the pottery school in Rabil, the second-largest town on the island. Here, local artisans continue centuries-old traditions, crafting beautiful pottery using techniques passed down through generations. Watch them work and learn about this important part of Cabo Verdean heritage.
+
+Continue to the iconic Cabo Santa María shipwreck, a Spanish cargo ship that ran aground in 1968. This rusting vessel, sitting on pristine white sand, has become one of Boa Vista's most photographed landmarks. Then visit Fatima's Chapel, a small white church standing alone in the desert landscape—a peaceful and surreal sight.
+
+End your tour with refreshments at Sodade Restaurant, where you can enjoy local snacks while taking in views of the beautiful coastline.`,
+    highlights: [
+      'Visit Rabil pottery school - traditional craftsmanship',
+      'See the famous Cabo Santa María shipwreck',
+      'Explore Fatima\'s Chapel in the desert',
+      'Enjoy snacks at Sodade Restaurant',
+      'Learn about local culture and history',
+      'Beautiful coastal scenery'
+    ],
+    includes: [
+      'Hotel pickup and drop-off',
+      '4x4 vehicle transportation',
+      'Professional local guide',
+      'Snacks and refreshments',
+      'All entrance fees'
+    ],
+    image: '/images/tours/north-tour.jpg',
+    gallery: ['/images/tours/north-tour/1.jpg', '/images/tours/north-tour/2.jpg', '/images/tours/north-tour/3.jpg', '/images/tours/north-tour/4.jpg'],
+    duration: '4 hours',
+    price: '€50 / €40',
+    priceNote: 'Adult / Child (under 12)',
+    category: 'Half Day'
+  },
+  'south-tour': {
+    title: 'South Coast Discovery',
+    description: 'Explore the Viana desert, the old village Povoação Velha, Varandinha\'s caves, Santa Monica beach and enjoy a cocktail at Origens.',
+    fullDescription: `Journey to the spectacular south coast of Boa Vista, where you'll discover some of the island's most breathtaking landscapes and hidden gems. This half-day tour is perfect for those wanting to experience the wild beauty of the southern coastline.
+
+Start with a drive through the stunning Viana Desert, where golden sand dunes stretch as far as the eye can see. Visit Povoação Velha, the oldest settlement on the island, where you can see traditional architecture and learn about the island's early history.
+
+Continue to Varandinha Beach, a dramatic stretch of coastline featuring natural caves carved into towering cliffs by centuries of ocean waves. Explore these mysterious formations and enjoy the crystal-clear waters.
+
+The highlight of the tour is Santa Monica Beach—22 kilometers of pristine white sand that rivals the Caribbean. End your adventure at Origens restaurant, where you'll enjoy a refreshing cocktail while watching the sunset over the Atlantic.`,
+    highlights: [
+      'Drive through the golden Viana Desert',
+      'Visit Povoação Velha - oldest village on the island',
+      'Explore Varandinha\'s dramatic caves and cliffs',
+      'Relax at Santa Monica Beach (22km of white sand)',
+      'Sunset cocktail at Origens restaurant',
+      'Stunning photo opportunities'
+    ],
+    includes: [
+      'Hotel pickup and drop-off',
+      '4x4 vehicle transportation',
+      'Professional local guide',
+      'Cocktail at Origens restaurant'
+    ],
+    image: '/images/tours/south-tour.jpg',
+    gallery: ['/images/tours/south-tour/1.jpg', '/images/tours/south-tour/2.jpg', '/images/tours/south-tour/3.jpg', '/images/tours/south-tour/4.jpg'],
+    duration: '4 hours',
+    price: '€40 / €30',
+    priceNote: 'Adult / Child (under 12)',
+    category: 'Half Day'
+  },
+  'traditional-tour': {
+    title: 'Traditional & Cultural Tour',
+    description: 'Visit Santos Farm, João Galego village, the lighthouse of Morro Negro, Grand Canyon and experience the charm of Route 66.',
+    fullDescription: `Immerse yourself in the authentic culture and traditions of Boa Vista on this unique tour. Unlike typical tourist excursions, this experience takes you to the heart of local life, visiting working farms, traditional villages, and spectacular natural landmarks.
+
+Begin at Santos Farm, a working agricultural property where you'll learn about traditional farming methods and see how locals have adapted to the island's arid climate. Meet friendly farm animals and taste fresh local produce.
+
+Travel to João Galego, one of the island's most traditional villages, where time seems to stand still. Walk through narrow streets, see colorful houses, and experience the warm hospitality of the local community.
+
+Visit the lighthouse at Morro Negro, perched on dramatic black volcanic cliffs—a stunning contrast to the golden beaches elsewhere on the island. Continue to what locals call the "Grand Canyon," a spectacular ravine showcasing millions of years of geological history. Drive along the famous Route 66, a scenic road that winds through some of Boa Vista's most dramatic landscapes.`,
+    highlights: [
+      'Visit Santos Farm - authentic agricultural experience',
+      'Explore João Galego traditional village',
+      'See Morro Negro lighthouse on volcanic cliffs',
+      'Marvel at the "Grand Canyon" of Boa Vista',
+      'Drive the scenic Route 66',
+      'Authentic cultural immersion'
+    ],
+    includes: [
+      'Hotel pickup and drop-off',
+      '4x4 vehicle transportation',
+      'Professional local guide',
+      'Farm visit with tastings',
+      'Refreshments'
+    ],
+    image: '/images/tours/traditional-tour.jpg',
+    gallery: ['/images/tours/traditional-tour/1.jpg', '/images/tours/traditional-tour/2.jpg', '/images/tours/traditional-tour/3.jpg', '/images/tours/traditional-tour/4.jpg'],
+    duration: '4 hours',
+    price: '€45 / €30',
+    priceNote: 'Adult / Child (under 12)',
+    category: 'Culture'
+  },
+  'sandboarding': {
+    title: 'Sandboarding Adventure',
+    description: 'Experience the thrill of sandboarding down the golden dunes at Morro de Areia. Professional instructor and all equipment included.',
+    fullDescription: `Get ready for an adrenaline-pumping adventure on the golden sand dunes of Boa Vista! Our Sandboarding Adventure takes you to Morro de Areia, home to some of the most impressive dunes on the island, where you'll learn to surf the sand like a pro.
+
+Whether you've never stood on a board before or you're an experienced snowboarder looking for a summer thrill, our professional instructors will have you carving down the dunes in no time. The soft sand provides a forgiving landing, making this activity perfect for all skill levels.
+
+Feel the rush as you slide down towering dunes, with the desert landscape stretching out around you and the ocean glittering in the distance. Between runs, take in the stunning views and snap some incredible photos. All equipment is provided, including boards and protective gear, and our instructors will ensure you have a safe and exciting experience.`,
+    highlights: [
+      'Sandboard down golden dunes at Morro de Areia',
+      'Professional instruction for all skill levels',
+      'All equipment provided',
+      'Multiple runs down the dunes',
+      'Stunning desert and ocean views',
+      'Great for families and thrill-seekers'
+    ],
+    includes: [
+      'Hotel pickup and drop-off',
+      'Sandboard equipment',
+      'Professional instructor',
+      'Safety briefing',
+      'Refreshments',
+      'Photos of your experience'
+    ],
+    image: '/images/tours/sandboarding.jpg',
+    gallery: ['/images/tours/sandboarding/1.jpg', '/images/tours/sandboarding/2.jpg', '/images/tours/sandboarding/3.jpg', '/images/tours/sandboarding/4.jpg'],
+    duration: '2 hours',
+    price: '€35 / €25',
+    priceNote: 'Adult / Child (under 12)',
+    category: 'Adventure'
+  },
+  'green-turtle-tour': {
+    title: 'Green Turtle & Shark Bay Tour',
+    description: 'Experience sandboarding, visit Santa Monica, see green turtles and lemon sharks in their natural habitat, and taste local specialties.',
+    fullDescription: `This unique tour combines adventure, wildlife, and culinary experiences into one unforgettable day. See some of Boa Vista's most incredible marine life while also enjoying the island's best activities and local cuisine.
+
+Start your adventure with sandboarding on the golden dunes, an exhilarating activity that will get your adrenaline pumping. Then head to the stunning Santa Monica Beach for a refreshing swim in crystal-clear waters.
+
+The highlight of this tour is visiting a secluded bay where green sea turtles and lemon sharks gather in shallow waters. Wade into the warm sea and watch these magnificent creatures swim peacefully around you—a truly magical experience. Our guides ensure this is done safely and with respect for the wildlife.
+
+End your tour with a taste of local specialties, including fresh seafood prepared in traditional Cabo Verdean style. This tour offers the perfect blend of adventure, nature, and culture.`,
+    highlights: [
+      'Sandboarding on golden dunes',
+      'Visit beautiful Santa Monica Beach',
+      'See green turtles in their natural habitat',
+      'Watch lemon sharks in shallow bay',
+      'Taste local Cabo Verdean specialties',
+      'Eco-friendly wildlife experience'
+    ],
+    includes: [
+      'Hotel pickup and drop-off',
+      '4x4 vehicle transportation',
+      'Professional local guide',
+      'Sandboarding equipment',
+      'Local food tastings',
+      'Refreshments'
+    ],
+    image: '/images/tours/green-turtle.jpg',
+    gallery: ['/images/tours/green-turtle-tour/1.jpg', '/images/tours/green-turtle-tour/2.jpg', '/images/tours/green-turtle-tour/3.jpg', '/images/tours/green-turtle-tour/4.jpg'],
+    duration: '4 hours',
+    price: '€45 / €30',
+    priceNote: 'Adult / Child (under 12)',
+    category: 'Wildlife'
+  },
+  'turtle-watching': {
+    title: 'Turtle Nesting Evening Tour',
+    description: 'Witness loggerhead turtles preparing nests and laying eggs on the beach. A unique experience during nesting season (June-October).',
+    fullDescription: `Experience one of nature's most moving spectacles on our Turtle Nesting Evening Tour. Boa Vista hosts the third-largest population of loggerhead sea turtles in the world, and during nesting season (June to October), these ancient creatures return to the beaches where they were born to lay their eggs.
+
+As darkness falls, we'll take you to a protected nesting beach where, under the guidance of trained turtle conservationists, you'll witness female loggerheads emerge from the ocean to dig their nests and lay their eggs. Watch in awe as these prehistoric creatures, some weighing over 100kg, perform their ancient ritual by moonlight.
+
+This is an eco-tourism experience designed with turtle conservation in mind. Our guides are trained in responsible turtle watching, ensuring minimal disturbance to the animals. You'll learn about the incredible life cycle of these endangered creatures and the conservation efforts protecting them on Boa Vista.
+
+Red-light torches are used to avoid disturbing the turtles, and strict protocols ensure their safety. This experience is limited in numbers to protect the wildlife, making it an exclusive and intimate encounter with nature.`,
+    highlights: [
+      'Witness loggerhead turtles nesting on the beach',
+      'See turtles laying eggs by moonlight',
+      'Learn from trained conservationists',
+      'Support local turtle conservation efforts',
+      'Small group for minimal wildlife disturbance',
+      'Unforgettable once-in-a-lifetime experience'
+    ],
+    includes: [
+      'Hotel pickup and drop-off',
+      'Professional conservationist guide',
+      'Red-light torch',
+      'Conservation donation included',
+      'Refreshments'
+    ],
+    image: '/images/tours/turtle-watching.jpg',
+    gallery: ['/images/tours/turtle-watching/1.jpg', '/images/tours/turtle-watching/2.jpg', '/images/tours/turtle-watching/3.jpg', '/images/tours/turtle-watching/4.jpg'],
+    duration: '3 hours',
+    price: '€65 / €45',
+    priceNote: 'Adult / Child (under 12)',
+    category: 'Wildlife',
+    seasonal: 'June to October only (nesting season)'
+  }
+};
+
+export function getStaticPaths() {
+  const tours = {
+    'island-tour': { title: '4x4 Full Day Island Tour' },
+    'whale-watching': { title: 'Whale Watching Expedition' },
+    'buggy-adventure': { title: '4WD Buggy Adventure' },
+    'quad-tour': { title: 'Off-Road Quad Bike Tour' },
+    'north-tour': { title: 'North Coast Discovery' },
+    'south-tour': { title: 'South Coast Discovery' },
+    'traditional-tour': { title: 'Traditional & Cultural Tour' },
+    'sandboarding': { title: 'Sandboarding Adventure' },
+    'green-turtle-tour': { title: 'Green Turtle & Shark Bay Tour' },
+    'turtle-watching': { title: 'Turtle Nesting Evening Tour' }
+  };
+
+  return Object.keys(tours).map(slug => ({
+    params: { slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const tour = toursData[slug as string];
+
+if (!tour) {
+  return Astro.redirect('/tours');
+}
+---
+
+<BaseLayout title={tour.title} description={tour.description} image={tour.image}>
+  <!-- Hero Section -->
+  <section class="relative pt-16 md:pt-20">
+    <div class="relative h-[50vh] md:h-[60vh] min-h-[400px]">
+    <img
+      src={tour.image}
+      alt={tour.title}
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/40 to-transparent"></div>
+    <div class="absolute inset-0 flex items-end">
+      <div class="container pb-8 md:pb-12">
+        <a href="/tours" class="inline-flex items-center text-white/80 hover:text-white mb-4 transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to All Tours
+        </a>
+        <span class="inline-block bg-primary text-white text-sm font-medium px-3 py-1 rounded-full mb-3">
+          {tour.category}
+        </span>
+        <h1 class="font-display font-bold text-3xl md:text-5xl text-white mb-4">
+          {tour.title}
+        </h1>
+        <div class="flex flex-wrap gap-4 text-white/90">
+          <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {tour.duration}
+          </div>
+          <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {tour.price}
+          </div>
+          {tour.seasonal && (
+            <div class="flex items-center text-yellow-300">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              {tour.seasonal}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="pt-16 pb-12 md:pt-20 md:pb-16 bg-white relative z-10">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
+        <!-- Left Column - Tour Details -->
+        <div class="lg:col-span-2">
+          <div class="prose prose-lg max-w-none">
+            <h2 class="font-display font-bold text-2xl text-dark mb-4">About This Tour</h2>
+            {tour.fullDescription.split('\n\n').map(paragraph => (
+              <p class="text-gray-600 mb-4">{paragraph}</p>
+            ))}
+          </div>
+
+          <!-- Highlights -->
+          <div class="mt-10">
+            <h2 class="font-display font-bold text-2xl text-dark mb-6">Tour Highlights</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {tour.highlights.map(highlight => (
+                <div class="flex items-start">
+                  <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-700">{highlight}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- What's Included -->
+          <div class="mt-10">
+            <h2 class="font-display font-bold text-2xl text-dark mb-6">What's Included</h2>
+            <div class="bg-green-50 rounded-xl p-6">
+              <ul class="space-y-3">
+                {tour.includes.map(item => (
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-gray-700">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Photo Gallery -->
+          <div class="mt-10">
+            <h2 class="font-display font-bold text-2xl text-dark mb-6">Photo Gallery</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {tour.gallery.map((image, index) => (
+                <button
+                  class="gallery-item relative aspect-square overflow-hidden rounded-lg group cursor-pointer"
+                  data-index={index}
+                >
+                  <img
+                    src={image}
+                    alt={`${tour.title} - Photo ${index + 1}`}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column - Booking Card -->
+        <div class="lg:col-span-1">
+          <div class="bg-light rounded-2xl p-6 md:p-8 sticky top-24 z-30">
+            <div class="text-center mb-6">
+              <div class="text-3xl font-bold text-primary mb-1">{tour.price}</div>
+              {tour.priceNote && (
+                <div class="text-sm text-gray-500">{tour.priceNote}</div>
+              )}
+            </div>
+
+            <div class="space-y-4 mb-6">
+              <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                <span class="text-gray-600">Duration</span>
+                <span class="font-semibold text-dark">{tour.duration}</span>
+              </div>
+              <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                <span class="text-gray-600">Category</span>
+                <span class="font-semibold text-dark">{tour.category}</span>
+              </div>
+              {tour.seasonal && (
+                <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                  <span class="text-gray-600">Season</span>
+                  <span class="font-semibold text-primary">{tour.seasonal.split(' ')[0]} - {tour.seasonal.split(' ')[2]}</span>
+                </div>
+              )}
+            </div>
+
+            <a
+              href={`https://wa.me/2389567904?text=Hi! I'm interested in booking the ${tour.title}. Can you help me with availability and booking?`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full inline-flex items-center justify-center px-6 py-4 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors mb-3"
+            >
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Book via WhatsApp
+            </a>
+
+            <a
+              href="/contact"
+              class="w-full inline-flex items-center justify-center px-6 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Contact Us
+            </a>
+
+            <p class="text-center text-sm text-gray-500 mt-4">
+              Free cancellation up to 24 hours before the tour
+            </p>
+
+            <!-- TripAdvisor Trust Badge -->
+            <a
+              href="https://www.tripadvisor.com/Attraction_Review-g1185333-d25323646-Reviews-Boavista_Go_Tours_Expeditions-Sal_Rei_Boa_Vista.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-6 flex items-center justify-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-green-300 transition-colors"
+            >
+              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="10" fill="#00AF87"/>
+                <circle cx="8.5" cy="12" r="2.5" fill="white"/>
+                <circle cx="15.5" cy="12" r="2.5" fill="white"/>
+                <circle cx="8.5" cy="12" r="1" fill="#00AF87"/>
+                <circle cx="15.5" cy="12" r="1" fill="#00AF87"/>
+              </svg>
+              <div class="text-left">
+                <div class="flex items-center gap-1">
+                  <span class="font-bold text-dark">4.9</span>
+                  <div class="flex">
+                    {[1,2,3,4,5].map(() => (
+                      <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <div class="text-xs text-gray-500">#1 in Sal Rei · 73+ reviews</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Important Info -->
+  <section class="py-12 bg-light relative z-10">
+    <div class="container">
+      <h2 class="font-display font-bold text-2xl text-dark mb-8 text-center">Good to Know</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 text-center">
+          <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-dark mb-2">Hotel Pickup</h3>
+          <p class="text-gray-600 text-sm">We pick you up directly from your hotel or accommodation</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 text-center">
+          <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-dark mb-2">Free Cancellation</h3>
+          <p class="text-gray-600 text-sm">Cancel up to 24 hours before for a full refund</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 text-center">
+          <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-dark mb-2">Multilingual Guides</h3>
+          <p class="text-gray-600 text-sm">Tours available in English, French & Portuguese</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other Tours CTA -->
+  <section class="py-12 md:py-16 bg-white relative z-10">
+    <div class="container text-center">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-dark mb-4">
+        Explore More Adventures
+      </h2>
+      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+        Discover all our tours and find your perfect Boa Vista experience
+      </p>
+      <a
+        href="/tours"
+        class="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
+      >
+        View All Tours
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center">
+    <button id="lightbox-close" class="absolute top-4 right-4 text-white hover:text-gray-300 z-10">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 z-10">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 z-10">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+    <img id="lightbox-image" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain" />
+  </div>
+</BaseLayout>
+
+<script define:vars={{ galleryImages: tour.gallery }}>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image');
+  const closeBtn = document.getElementById('lightbox-close');
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+
+  let currentIndex = 0;
+  const images = galleryImages;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lightboxImage.src = images[currentIndex];
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % images.length;
+    lightboxImage.src = images[currentIndex];
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    lightboxImage.src = images[currentIndex];
+  }
+
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => openLightbox(index));
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+  prevBtn.addEventListener('click', showPrev);
+  nextBtn.addEventListener('click', showNext);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') showNext();
+    if (e.key === 'ArrowLeft') showPrev();
+  });
+</script>

@@ -2,122 +2,104 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TourCard from '../../components/TourCard.astro';
 
-// All tours data - replace with actual content later
+// All tours with real content
 const allTours = [
   {
-    title: 'Desert Safari Adventure',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Explore the stunning Viana Desert and discover ancient shipwrecks.',
-    image: '/images/tours/desert-safari.jpg',
-    duration: '4 hours',
-    price: 'From €65',
-    slug: 'desert-safari',
-    category: 'Adventure'
-  },
-  {
-    title: 'Santa Monica Beach Tour',
-    description: 'Lorem ipsum dolor sit amet. Visit the longest beach in Cape Verde, stretching 22km of pristine white sand.',
-    image: '/images/tours/santa-monica.jpg',
-    duration: '6 hours',
-    price: 'From €55',
-    slug: 'santa-monica-beach',
-    category: 'Beach'
+    title: '4x4 Full Day Island Tour',
+    description: 'Explore Santa Monica beach, discover shipwrecks, see Varandinha\'s mysterious caves, sandboard on dunes, and savor a tasty local lunch.',
+    image: '/images/tours/island-tour.jpg',
+    duration: '8 hours',
+    price: '€70 / €50',
+    slug: 'island-tour',
+    category: 'Full Day'
   },
   {
     title: 'Whale Watching Expedition',
-    description: 'Lorem ipsum dolor sit amet. Witness majestic humpback whales in their natural habitat with expert marine guides.',
+    description: 'Join us on the ultimate whale-watching expedition in the pristine waters of Boa Vista Island. Seasonal tour from March to May.',
     image: '/images/tours/whale-watching.jpg',
     duration: '3 hours',
-    price: 'From €75',
+    price: '€80 / €60',
     slug: 'whale-watching',
     category: 'Wildlife'
   },
   {
-    title: 'Cultural Heritage Tour',
-    description: 'Lorem ipsum dolor sit amet. Discover the rich history and traditions of Boa Vista through its villages and artisans.',
-    image: '/images/tours/cultural-tour.jpg',
-    duration: '5 hours',
-    price: 'From €45',
-    slug: 'cultural-tour',
-    category: 'Culture'
+    title: '4WD Buggy Adventure',
+    description: 'Explore this amazing environment surrounded by untouched nature. Drive through sand dunes, desert and visit Fatima\'s Chapel and Sal Rei city.',
+    image: '/images/tours/buggy-tour.jpg',
+    duration: '2 hours',
+    price: 'From €70',
+    slug: 'buggy-adventure',
+    category: 'Adventure'
   },
   {
-    title: 'Quad Bike Desert Experience',
-    description: 'Lorem ipsum dolor sit amet. Thrilling quad bike adventure through dunes, beaches, and to the famous shipwreck.',
+    title: 'Off-Road Quad Bike Tour',
+    description: 'Discover the diverse scenery of Cape Verde on a quad tour through sand dunes, beaches, and caves to Santa Monica beach.',
     image: '/images/tours/quad-tour.jpg',
-    duration: '2 hours',
-    price: 'From €80',
+    duration: '4 hours',
+    price: '€150 / €220',
     slug: 'quad-tour',
     category: 'Adventure'
   },
   {
-    title: 'Sunset Island Tour',
-    description: 'Lorem ipsum dolor sit amet. Experience magical sunset views from secret locations across the island.',
-    image: '/images/tours/sunset-tour.jpg',
+    title: 'North Coast Discovery',
+    description: 'Visit the pottery school in Rabil, the famous shipwreck at Cabo Santa María, Fatima\'s Chapel, and enjoy snacks at Sodade Restaurant.',
+    image: '/images/tours/north-tour.jpg',
     duration: '4 hours',
-    price: 'From €50',
-    slug: 'sunset-tour',
-    category: 'Scenic'
+    price: '€50 / €40',
+    slug: 'north-tour',
+    category: 'Half Day'
   },
   {
-    title: 'Jeep Expedition North',
-    description: 'Lorem ipsum dolor sit amet. Full-day jeep expedition exploring the northern coast, villages and hidden beaches.',
-    image: '/images/tours/jeep-north.jpg',
-    duration: 'Full day',
-    price: 'From €85',
-    slug: 'jeep-expedition-north',
-    category: 'Adventure'
-  },
-  {
-    title: 'Jeep Expedition South',
-    description: 'Lorem ipsum dolor sit amet. Discover the southern landscapes with stunning beaches and traditional villages.',
-    image: '/images/tours/jeep-south.jpg',
-    duration: 'Full day',
-    price: 'From €85',
-    slug: 'jeep-expedition-south',
-    category: 'Adventure'
-  },
-  {
-    title: 'Buggy Adventure Tour',
-    description: 'Lorem ipsum dolor sit amet. Exciting buggy ride through diverse terrains from desert dunes to coastal paths.',
-    image: '/images/tours/buggy-tour.jpg',
-    duration: '3 hours',
-    price: 'From €90',
-    slug: 'buggy-tour',
-    category: 'Adventure'
-  },
-  {
-    title: 'Fishing Experience',
-    description: 'Lorem ipsum dolor sit amet. Traditional fishing excursion with local fishermen in crystal clear waters.',
-    image: '/images/tours/fishing.jpg',
+    title: 'South Coast Discovery',
+    description: 'Explore the Viana desert, the old village Povoação Velha, Varandinha\'s caves, Santa Monica beach and enjoy a cocktail at Origens.',
+    image: '/images/tours/south-tour.jpg',
     duration: '4 hours',
-    price: 'From €60',
-    slug: 'fishing-experience',
-    category: 'Experience'
+    price: '€40 / €30',
+    slug: 'south-tour',
+    category: 'Half Day'
   },
   {
-    title: 'Snorkeling Paradise',
-    description: 'Lorem ipsum dolor sit amet. Explore vibrant underwater world at the best snorkeling spots of Boa Vista.',
-    image: '/images/tours/snorkeling.jpg',
-    duration: '3 hours',
-    price: 'From €45',
-    slug: 'snorkeling',
-    category: 'Water Sports'
+    title: 'Traditional & Cultural Tour',
+    description: 'Visit Santos Farm, João Galego village, the lighthouse of Morro Negro, Grand Canyon and experience the charm of Route 66.',
+    image: '/images/tours/traditional-tour.jpg',
+    duration: '4 hours',
+    price: '€45 / €30',
+    slug: 'traditional-tour',
+    category: 'Culture'
   },
   {
-    title: 'Turtle Watching Tour',
-    description: 'Lorem ipsum dolor sit amet. Seasonal guided tours to witness loggerhead turtles nesting on our beaches.',
+    title: 'Sandboarding Adventure',
+    description: 'Experience the thrill of sandboarding down the golden dunes at Morro de Areia. Professional instructor and all equipment included.',
+    image: '/images/tours/sandboarding.jpg',
+    duration: '2 hours',
+    price: '€35 / €25',
+    slug: 'sandboarding',
+    category: 'Adventure'
+  },
+  {
+    title: 'Green Turtle & Shark Bay Tour',
+    description: 'Experience sandboarding, visit Santa Monica, see green turtles and lemon sharks in their natural habitat, and taste local specialties.',
+    image: '/images/tours/green-turtle.jpg',
+    duration: '4 hours',
+    price: '€45 / €30',
+    slug: 'green-turtle-tour',
+    category: 'Wildlife'
+  },
+  {
+    title: 'Turtle Nesting Evening Tour',
+    description: 'Witness loggerhead turtles preparing nests and laying eggs on the beach. A unique experience during nesting season (June-October).',
     image: '/images/tours/turtle-watching.jpg',
     duration: '3 hours',
-    price: 'From €40',
+    price: '€65 / €45',
     slug: 'turtle-watching',
     category: 'Wildlife'
   }
 ];
 
-const categories = ['All', 'Adventure', 'Beach', 'Wildlife', 'Culture', 'Scenic', 'Water Sports', 'Experience'];
+const categories = ['All', 'Full Day', 'Half Day', 'Adventure', 'Wildlife', 'Culture'];
 ---
 
-<BaseLayout title="Tours & Expeditions" description="Explore all our tours and expeditions in Boa Vista, Cape Verde. Desert safaris, beach tours, whale watching, cultural experiences and more.">
+<BaseLayout title="Tours & Expeditions" description="Explore all our tours and expeditions in Boa Vista, Cape Verde. Island tours, whale watching, quad biking, cultural experiences and more.">
   <!-- Page Header -->
   <section class="pt-24 pb-12 md:pt-32 md:pb-16 bg-dark">
     <div class="container">
@@ -127,7 +109,7 @@ const categories = ['All', 'Adventure', 'Beach', 'Wildlife', 'Culture', 'Scenic'
           Tours & Expeditions
         </h1>
         <p class="text-gray-300 text-lg">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Choose from our carefully curated experiences.
+          Boa Vista is known by the locals as "The Fantastic Island" - and you will agree with that definition for sure. Choose your adventure below!
         </p>
       </div>
     </div>
@@ -175,15 +157,51 @@ const categories = ['All', 'Adventure', 'Beach', 'Wildlife', 'Culture', 'Scenic'
     </div>
   </section>
 
+  <!-- Info Section -->
+  <section class="py-12 bg-white">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div class="p-6">
+          <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-dark mb-2">Free Cancellation</h3>
+          <p class="text-gray-600 text-sm">Cancel anytime before the tour for a full refund</p>
+        </div>
+        <div class="p-6">
+          <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-dark mb-2">Hotel Pickup</h3>
+          <p class="text-gray-600 text-sm">Transport included from your hotel</p>
+        </div>
+        <div class="p-6">
+          <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-dark mb-2">Multilingual Guides</h3>
+          <p class="text-gray-600 text-sm">Tours available in English, French & Portuguese</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section -->
-  <section class="py-16 md:py-20 bg-white">
+  <section class="py-16 md:py-20 bg-light">
     <div class="container">
       <div class="bg-primary rounded-2xl p-8 md:p-12 text-center">
         <h2 class="font-display font-bold text-2xl md:text-3xl text-white mb-4">
           Can't Find What You're Looking For?
         </h2>
         <p class="text-white/90 mb-8 max-w-2xl mx-auto">
-          Lorem ipsum dolor sit amet. We offer custom tours tailored to your preferences. Contact us to create your perfect adventure.
+          We offer custom tours tailored to your preferences. Contact us to create your perfect Boa Vista adventure.
         </p>
         <a
           href="/contact"

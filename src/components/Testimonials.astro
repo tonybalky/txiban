@@ -1,0 +1,131 @@
+---
+// Real TripAdvisor reviews for Boavista Go Tours & Expeditions
+// Source: https://www.tripadvisor.com/Attraction_Review-g1185333-d25323646-Reviews-Boavista_Go_Tours_Expeditions-Sal_Rei_Boa_Vista.html
+const testimonials = [
+  {
+    name: "TripAdvisor Reviewer",
+    tour: "4x4 Island Tour",
+    rating: 5,
+    text: "Wow what a fantastic trip. Was a great day out! Sandboarding was fun even for us oldies, saw a couple of turtles and the sharks too at a distance. The 4x4 off road ride was a great experience! The beaches were outstanding!",
+    highlight: "The trip to the local village, shots and food samples were great fun! We were made very welcome. We met some wonderful people on the trip too. Just 6 of us.. and our guide Freddy was amazing, informative and fun! Absolutely worth every penny."
+  },
+  {
+    name: "TripAdvisor Reviewer",
+    tour: "Turtle Nesting Tour",
+    rating: 5,
+    text: "The experience was magical. Our turtle researcher Christiano and guide Julie have been extremely attentive to make my dream live up to my expectations.",
+    highlight: "A beautiful turtle with a laying of almost 100 eggs gave us a moving spectacle. Exemplary professionalism. I recommend 200%!"
+  },
+  {
+    name: "TripAdvisor Reviewer",
+    tour: "Green Turtle & Shark Bay",
+    rating: 5,
+    text: "Very fun experience. Sand surfing great, seeing the turtles, sharks, and beautiful beach amazing, tasting interesting.",
+    highlight: "Did not realize we would be in the back of a pickup truck - bring lots of sun cream and a cover up!"
+  },
+  {
+    name: "TripAdvisor Reviewer",
+    tour: "Turtle Nesting Tour",
+    rating: 5,
+    text: "Unique experience. We did this excursion in early July, the turtle season has only just started. Everything turned out fine and we could see the turtle clearly when she was laying her eggs.",
+    highlight: "The guides were very warm and friendly. Definitely recommended!"
+  }
+];
+---
+
+<section class="py-16 md:py-24 bg-white">
+  <div class="container">
+    <!-- Header -->
+    <div class="text-center mb-12 md:mb-16">
+      <span class="text-primary font-semibold text-sm tracking-wider uppercase">What Our Guests Say</span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-dark mt-2 mb-4">
+        Trusted by Travelers
+      </h2>
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <!-- TripAdvisor Rating Badge -->
+        <div class="flex items-center bg-green-50 px-4 py-2 rounded-full">
+          <svg class="w-6 h-6 text-green-600 mr-2" viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="10" fill="#00AF87"/>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#00AF87"/>
+            <circle cx="8.5" cy="12" r="2.5" fill="white"/>
+            <circle cx="15.5" cy="12" r="2.5" fill="white"/>
+            <circle cx="8.5" cy="12" r="1" fill="#00AF87"/>
+            <circle cx="15.5" cy="12" r="1" fill="#00AF87"/>
+          </svg>
+          <span class="font-bold text-green-700">4.9</span>
+          <span class="text-green-600 text-sm ml-1">/ 5</span>
+        </div>
+        <div class="text-gray-500 text-sm">
+          Based on <span class="font-semibold text-dark">73+ reviews</span>
+        </div>
+      </div>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Ranked #1 Tour Provider in Sal Rei - See why travelers love exploring Boa Vista with us
+      </p>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      {testimonials.map((testimonial) => (
+        <div class="bg-light rounded-2xl p-6 md:p-8 relative">
+          <!-- Quote Icon -->
+          <div class="absolute top-6 right-6 text-primary/10">
+            <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+          </div>
+
+          <!-- Stars -->
+          <div class="flex gap-1 mb-4">
+            {Array(testimonial.rating).fill(0).map(() => (
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+
+          <!-- Review Text -->
+          <p class="text-gray-600 mb-4 leading-relaxed">
+            "{testimonial.text}"
+          </p>
+
+          <!-- Highlight -->
+          <p class="text-dark font-medium italic mb-6">
+            "{testimonial.highlight}"
+          </p>
+
+          <!-- Reviewer Info -->
+          <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+            <div>
+              <div class="font-semibold text-dark">{testimonial.name}</div>
+              <div class="text-sm text-gray-500">{testimonial.tour}</div>
+            </div>
+            <div class="flex items-center text-green-600 text-sm">
+              <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              Verified
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- TripAdvisor Link -->
+    <div class="text-center mt-12">
+      <a
+        href="https://www.tripadvisor.com/Attraction_Review-g1185333-d25323646-Reviews-Boavista_Go_Tours_Expeditions-Sal_Rei_Boa_Vista.html"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
+      >
+        <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="10" fill="white"/>
+          <circle cx="8.5" cy="12" r="2" fill="#00AF87"/>
+          <circle cx="15.5" cy="12" r="2" fill="#00AF87"/>
+        </svg>
+        See All Reviews on TripAdvisor
+      </a>
+    </div>
+  </div>
+</section>

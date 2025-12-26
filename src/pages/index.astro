@@ -2,62 +2,63 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import TourCard from '../components/TourCard.astro';
+import Testimonials from '../components/Testimonials.astro';
 
-// Featured tours data - replace with actual content later
+// Featured tours with real content
 const featuredTours = [
   {
-    title: 'Desert Safari Adventure',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Explore the stunning Viana Desert.',
-    image: '/images/tours/desert-safari.jpg',
-    duration: '4 hours',
-    price: 'From €65',
-    slug: 'desert-safari',
-    category: 'Adventure'
-  },
-  {
-    title: 'Santa Monica Beach Tour',
-    description: 'Lorem ipsum dolor sit amet. Visit the longest beach in Cape Verde, 22km of pristine sand.',
-    image: '/images/tours/santa-monica.jpg',
-    duration: '6 hours',
-    price: 'From €55',
-    slug: 'santa-monica-beach',
-    category: 'Beach'
+    title: '4x4 Full Day Island Tour',
+    description: 'Explore Santa Monica beach, discover shipwrecks, see Varandinha\'s mysterious caves, sandboard on dunes, and savor a tasty local lunch.',
+    image: '/images/tours/island-tour.jpg',
+    duration: '8 hours',
+    price: 'From €70',
+    slug: 'island-tour',
+    category: 'Full Day'
   },
   {
     title: 'Whale Watching Expedition',
-    description: 'Lorem ipsum dolor sit amet. Witness majestic humpback whales in their natural habitat.',
+    description: 'Join us on the ultimate whale-watching expedition in the pristine waters of Boa Vista Island, where every wave brings the promise of a breathtaking spectacle.',
     image: '/images/tours/whale-watching.jpg',
     duration: '3 hours',
-    price: 'From €75',
+    price: 'From €80',
     slug: 'whale-watching',
     category: 'Wildlife'
   },
   {
-    title: 'Cultural Heritage Tour',
-    description: 'Lorem ipsum dolor sit amet. Discover the rich history and traditions of Boa Vista.',
-    image: '/images/tours/cultural-tour.jpg',
-    duration: '5 hours',
-    price: 'From €45',
-    slug: 'cultural-tour',
-    category: 'Culture'
+    title: '4WD Buggy Adventure',
+    description: 'Explore this amazing environment surrounded by untouched nature. Drive through sand dunes, desert and visit Fatima\'s Chapel.',
+    image: '/images/tours/buggy-tour.jpg',
+    duration: '2 hours',
+    price: 'From €70',
+    slug: 'buggy-adventure',
+    category: 'Adventure'
   },
   {
-    title: 'Quad Bike Desert Experience',
-    description: 'Lorem ipsum dolor sit amet. Thrilling quad bike adventure through dunes and shipwrecks.',
+    title: 'Off-Road Quad Bike Tour',
+    description: 'Discover the diverse scenery of Cape Verde on a quad tour through sand dunes, beaches, and caves. Feel the thrill of driving your own vehicle.',
     image: '/images/tours/quad-tour.jpg',
-    duration: '2 hours',
-    price: 'From €80',
+    duration: '4 hours',
+    price: 'From €150',
     slug: 'quad-tour',
     category: 'Adventure'
   },
   {
-    title: 'Sunset Island Tour',
-    description: 'Lorem ipsum dolor sit amet. Experience the magical sunset views from secret locations.',
-    image: '/images/tours/sunset-tour.jpg',
+    title: 'South Coast Discovery',
+    description: 'Discover the south coast on this guided 4x4 tour. Explore the Viana desert, Varandinha caves, Santa Monica beach and enjoy a cocktail!',
+    image: '/images/tours/south-tour.jpg',
     duration: '4 hours',
-    price: 'From €50',
-    slug: 'sunset-tour',
-    category: 'Scenic'
+    price: 'From €40',
+    slug: 'south-tour',
+    category: 'Half Day'
+  },
+  {
+    title: 'Turtle Watching Tour',
+    description: 'Spend a unique evening witnessing loggerhead turtles during nesting season. See the turtles preparing their nests and laying eggs on the beach.',
+    image: '/images/tours/turtle-watching.jpg',
+    duration: '3 hours',
+    price: 'From €65',
+    slug: 'turtle-watching',
+    category: 'Wildlife'
   }
 ];
 
@@ -65,22 +66,22 @@ const whyChooseUs = [
   {
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
     title: 'Local Expertise',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. We know every hidden gem.'
+    description: 'Born and raised on Boa Vista, we know every hidden gem, secret beach, and best viewpoint on the island.'
   },
   {
     icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-    title: 'Best Prices',
-    description: 'Lorem ipsum dolor sit amet. Competitive pricing without compromising on quality.'
+    title: 'Best Value',
+    description: 'Competitive pricing without compromising on quality. Get the most out of your holiday experience.'
   },
   {
     icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
     title: 'Small Groups',
-    description: 'Lorem ipsum dolor sit amet. Personalized attention with intimate group sizes.'
+    description: 'Personalized attention with intimate group sizes for a more authentic and memorable experience.'
   },
   {
     icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
     title: 'Passion & Care',
-    description: 'Lorem ipsum dolor sit amet. We love what we do and it shows in every tour.'
+    description: 'We aren\'t perfect yet but we strive to do our best and we are committed to honesty in everything we do.'
   }
 ];
 ---
@@ -89,7 +90,7 @@ const whyChooseUs = [
   <!-- Hero Section -->
   <Hero
     title="Discover the Magic of Boa Vista"
-    subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Experience unforgettable adventures on Cape Verde's most beautiful island."
+    subtitle="Experience unforgettable adventures on Cape Verde's most beautiful island. From pristine beaches to desert dunes, let us show you the best of Boa Vista."
     image="/images/hero-beach.jpg"
     ctaText="Explore Our Tours"
     ctaLink="/tours"
@@ -104,7 +105,7 @@ const whyChooseUs = [
           Popular Tours & Adventures
         </h2>
         <p class="text-gray-600 max-w-2xl mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
+          Boa Vista has 55 kilometers of white sandy beach along its coast providing a wild environment where nature still surprises us with its beauty.
         </p>
       </div>
 
@@ -137,7 +138,7 @@ const whyChooseUs = [
           Your Adventure Awaits
         </h2>
         <p class="text-gray-600 max-w-2xl mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Boa Vista is known by the locals as "The Fantastic Island" - and you will agree with that definition for sure!
         </p>
       </div>
 
@@ -164,13 +165,13 @@ const whyChooseUs = [
         <div class="relative">
           <img
             src="/images/about-preview.jpg"
-            alt="Boavista Go Team"
+            alt="Boavista Go Adventures"
             class="rounded-2xl shadow-xl w-full"
             loading="lazy"
           />
           <div class="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-xl shadow-lg hidden md:block">
-            <div class="text-4xl font-bold">10+</div>
-            <div class="text-sm opacity-90">Years Experience</div>
+            <div class="text-4xl font-bold">55km</div>
+            <div class="text-sm opacity-90">Of Beautiful Beaches</div>
           </div>
         </div>
         <div>
@@ -179,16 +180,16 @@ const whyChooseUs = [
             Your Local Guides to Paradise
           </h2>
           <p class="text-gray-600 mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+            Our tours were made especially for people who want to taste Boa Vista's spirit and culture in a very fun way. Get the most out of your holiday by exploring the best of the island with us.
           </p>
           <p class="text-gray-600 mb-8">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Cape Verde Islands hold the third largest community of Loggerhead sea turtles in the world and Boa Vista receives over 90% of them along its stunning coastline. Let us show you this and so much more!
           </p>
           <a
-            href="/about"
+            href="/tours"
             class="inline-flex items-center text-primary font-semibold hover:underline"
           >
-            Learn More About Us
+            Explore Our Tours
             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -197,6 +198,9 @@ const whyChooseUs = [
       </div>
     </div>
   </section>
+
+  <!-- Testimonials Section -->
+  <Testimonials />
 
   <!-- CTA Section -->
   <section class="py-16 md:py-24 bg-primary relative overflow-hidden">
@@ -216,7 +220,7 @@ const whyChooseUs = [
           Ready for Your Boa Vista Adventure?
         </h2>
         <p class="text-white/90 text-lg mb-8">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Contact us today to plan your perfect trip.
+          Jump on this adventure with us! Say goodbye to the highway and welcome off-road exploration of the fantastic island.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a
