@@ -14,6 +14,7 @@ interface Tour {
   priceNote?: string;
   category: string;
   seasonal?: string;
+  hideBookOnline?: boolean;
 }
 
 // All tour data with full descriptions
@@ -21,6 +22,7 @@ const toursData: Record<string, Tour> = {
   'island-tour': {
     title: '4x4 Full Day Island Tour',
     description: 'Explore Santa Monica beach, discover shipwrecks, see Varandinha\'s mysterious caves, sandboard on dunes, and savor a tasty local lunch.',
+    hideBookOnline: true,
     fullDescription: `The 4x4 Full Day Island Tour is designed for visitors seeking a comprehensive experience of the island in just one day. It offers a deep dive into Boa Vista's natural landscapes, cultural heritage, and unique attractions. Whether you're fascinated by stunning beaches, intrigued by historical sites, or eager to try sandboarding, this tour covers it all.
 
 This tour offers a variety of activities and locations to explore! First, you'll ride through the Viana Desert, a vast stretch of golden sand dunes with a stunning backdrop of mountains. Then, visit Varandinha Beach, known for its natural caves, crystal-clear waters, and dramatic cliffs. Stop by the shipwreck Cabo Santa Maria, a famous landmark on the northern coast that's become an iconic photo opportunity.
@@ -512,15 +514,17 @@ if (!tour) {
               )}
             </div>
 
-            <a
-              href={`/book?tour=${encodeURIComponent(tour.title)}`}
-              class="w-full inline-flex items-center justify-center px-6 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors mb-3"
-            >
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              Book Online
-            </a>
+            {!tour.hideBookOnline && (
+              <a
+                href={`/book?tour=${encodeURIComponent(tour.title)}`}
+                class="w-full inline-flex items-center justify-center px-6 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors mb-3"
+              >
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Book Online
+              </a>
+            )}
 
             <a
               href={`https://wa.me/2389567904?text=Hi! I'm interested in booking the ${tour.title}. Can you help me with availability and booking?`}
