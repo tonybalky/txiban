@@ -142,7 +142,7 @@ The tour includes stops at some of Boa Vista's most photogenic locations, giving
     category: 'Adventure'
   },
   'north-tour': {
-    title: 'North Coast Discovery',
+    title: '4x4 HD North - The Different Side',
     description: 'Visit the pottery school in Rabil, the famous shipwreck at Cabo Santa María, Fatima\'s Chapel, and enjoy snacks at Sodade Restaurant.',
     fullDescription: `Discover the cultural and natural treasures of Boa Vista's northern coast on this half-day adventure. This tour combines history, craftsmanship, and stunning coastal scenery for a well-rounded island experience.
 
@@ -174,7 +174,7 @@ End your tour with refreshments at Sodade Restaurant, where you can enjoy local 
     category: 'Half Day'
   },
   'south-tour': {
-    title: 'South Coast Discovery',
+    title: '4x4 HD South - The Big Surprise',
     description: 'Explore the Viana desert, the old village Povoação Velha, Varandinha\'s caves, Santa Monica beach and enjoy a cocktail at Origens.',
     fullDescription: `Journey to the spectacular south coast of Boa Vista, where you'll discover some of the island's most breathtaking landscapes and hidden gems. This half-day tour is perfect for those wanting to experience the wild beauty of the southern coastline.
 
@@ -237,7 +237,7 @@ Visit the lighthouse at Morro Negro, perched on dramatic black volcanic cliffs�
     category: 'Culture'
   },
   'sandboarding': {
-    title: 'Sandboarding Adventure',
+    title: 'Sandboarding Experience',
     description: 'Experience the thrill of sandboarding down the golden dunes at Morro de Areia. Professional instructor and all equipment included.',
     fullDescription: `Get ready for an adrenaline-pumping adventure on the golden sand dunes of Boa Vista! Our Sandboarding Adventure takes you to Morro de Areia, home to some of the most impressive dunes on the island, where you'll learn to surf the sand like a pro.
 
@@ -268,7 +268,7 @@ Feel the rush as you slide down towering dunes, with the desert landscape stretc
     category: 'Adventure'
   },
   'green-turtle-tour': {
-    title: 'Green Turtle & Shark Bay Tour',
+    title: '4x4 HD Turtle, Shark, Santa Monica, Sandboarding & Local Taste',
     description: 'Experience sandboarding, visit Santa Monica, see green turtles and lemon sharks in their natural habitat, and taste local specialties.',
     fullDescription: `This unique tour combines adventure, wildlife, and culinary experiences into one unforgettable day. See some of Boa Vista's most incredible marine life while also enjoying the island's best activities and local cuisine.
 
@@ -301,7 +301,7 @@ End your tour with a taste of local specialties, including fresh seafood prepare
     category: 'Wildlife'
   },
   'turtle-watching': {
-    title: 'Turtle Nesting Evening Tour',
+    title: 'Turtle Watching Expedition',
     description: 'Witness loggerhead turtles preparing nests and laying eggs on the beach. A unique experience during nesting season (June-October).',
     fullDescription: `Experience one of nature's most moving spectacles on our Turtle Nesting Evening Tour. Boa Vista hosts the third-largest population of loggerhead sea turtles in the world, and during nesting season (June to October), these ancient creatures return to the beaches where they were born to lay their eggs.
 
@@ -341,12 +341,12 @@ export function getStaticPaths() {
     'whale-watching': { title: 'Whale Watching Expedition' },
     'buggy-adventure': { title: '4WD Buggy Adventure' },
     'quad-tour': { title: 'Off-Road Quad Bike Tour' },
-    'north-tour': { title: 'North Coast Discovery' },
-    'south-tour': { title: 'South Coast Discovery' },
+    'north-tour': { title: '4x4 HD North - The Different Side' },
+    'south-tour': { title: '4x4 HD South - The Big Surprise' },
     'traditional-tour': { title: 'Traditional & Cultural Tour' },
-    'sandboarding': { title: 'Sandboarding Adventure' },
-    'green-turtle-tour': { title: 'Green Turtle & Shark Bay Tour' },
-    'turtle-watching': { title: 'Turtle Nesting Evening Tour' }
+    'sandboarding': { title: 'Sandboarding Experience' },
+    'green-turtle-tour': { title: '4x4 HD Turtle, Shark, Santa Monica, Sandboarding & Local Taste' },
+    'turtle-watching': { title: 'Turtle Watching Expedition' }
   };
 
   return Object.keys(tours).map(slug => ({
@@ -513,6 +513,16 @@ if (!tour) {
             </div>
 
             <a
+              href={`/book?tour=${encodeURIComponent(tour.title)}`}
+              class="w-full inline-flex items-center justify-center px-6 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors mb-3"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Book Online
+            </a>
+
+            <a
               href={`https://wa.me/2389567904?text=Hi! I'm interested in booking the ${tour.title}. Can you help me with availability and booking?`}
               target="_blank"
               rel="noopener noreferrer"
@@ -526,7 +536,7 @@ if (!tour) {
 
             <a
               href="/contact"
-              class="w-full inline-flex items-center justify-center px-6 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
+              class="w-full inline-flex items-center justify-center px-6 py-4 border-2 border-gray-300 text-dark font-semibold rounded-lg hover:border-primary hover:text-primary transition-colors"
             >
               <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -603,7 +613,7 @@ if (!tour) {
             </svg>
           </div>
           <h3 class="font-semibold text-dark mb-2">Multilingual Guides</h3>
-          <p class="text-gray-600 text-sm">Tours available in English, French & Portuguese</p>
+          <p class="text-gray-600 text-sm">Tours available in English, French, Portuguese & Spanish</p>
         </div>
       </div>
     </div>
